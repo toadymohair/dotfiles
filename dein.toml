@@ -1,0 +1,55 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'kana/vim-submode'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+# インデントに色を付けて見やすくする
+repo = 'nathanaelkane/vim-indent-guides'
+hook_add = '''
+  " vimを立ち上げたときに、自動的にvim-indent-guidesをオンにする
+  let g:indent_guides_enable_on_vim_startup = 1
+  let g:indent_guides_auto_colors = 0
+  let g:indent_guides_guide_size = 1
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+  autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=239
+'''
+
+[[plugins]]
+repo = 'scrooloose/nerdcommenter'
+
+[[plugins]]
+repo = 'xolox/vim-session'
+depends = ['xolox/vim-misc']
+hook_add = '''
+    " # 現在のディレクトリ直下の .vimsessions/ を取得
+    let s:local_session_directory = xolox#misc#path#merge(getcwd(), '.vimsessions')
+    " # 存在すれば
+    if isdirectory(s:local_session_directory)
+      " # session保存ディレクトリをそのディレクトリの設定
+      let g:session_directory = s:local_session_directory
+      " # vimを辞める時に自動保存
+      let g:session_autosave = 'yes'
+      " # 引数なしでvimを起動した時にsession保存ディレクトリのdefault.vimを開く
+      let g:session_autoload = 'yes'
+      " # 1分間に1回自動保存
+      let g:session_autosave_periodic = 1
+    else
+      " # デフォルトの保存ディレクトリを変更する
+      let g:session_directory = '~/.vim/sessions'
+      let g:session_autosave = 'yes'
+      let g:session_autoload = 'yes'
+      let g:session_autosave_periodic = 1
+    endif
+    unlet s:local_session_directory
+'''
+
+[[plugins]]
+repo = 'xolox/vim-misc'
