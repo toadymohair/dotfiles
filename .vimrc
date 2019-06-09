@@ -31,9 +31,8 @@ endif
 "End dein Scripts-------------------------
 
 
-
-
-
+" 構文ハイライトを有効化
+syntax enable
 
 
 filetype on
