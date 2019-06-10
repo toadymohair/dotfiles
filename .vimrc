@@ -36,6 +36,7 @@ syntax enable
 
 
 filetype on
+filetype plugin on
 
 set t_Co=256
 colorscheme default
