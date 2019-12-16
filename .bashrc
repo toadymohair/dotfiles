@@ -28,3 +28,6 @@ export LESSOPEN='|lessfilter %s'
 # vi/vimからshellに戻っていることをプロンプトに表示
 [[ -n "$VIMRUNTIME" ]] && \
     PS1='(VIM) \W \t $ '
+
+# history に時刻表示
+HISTTIMEFORMAT='%Y-%m-%d %T '
