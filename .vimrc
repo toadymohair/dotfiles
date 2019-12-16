@@ -168,36 +168,3 @@ endfunction
 tnoremap <C-e> <C-\><C-n>
 noremap <silent> <space>t :call TermOpen()<CR>
 
-function! CreateBufnr2tabnrDict() abort
-  let bufnr2tabnr_dict = {}
-  for tnr in range(1, tabpagenr('$'))
-    for bnr in tabpagebuflist(tnr)
-      let bufnr2tabnr_dict[bnr] = has_key(bufnr2tabnr_dict, bnr) ? add(bufnr2tabnr_dict[bnr], tnr) : [tnr]
-    endfor
-  endfor
-  for val in values(bufnr2tabnr_dict)
-    call uniq(sort(val))
-  endfor
-  return bufnr2tabnr_dict
-endfunction
-
-function! Bufnr2tabnr(bnr) abort
-  return CreateBufnr2tabnrDict()[a:bnr]
-endfunction
-
-function! ExitTerm()
-    if !empty(term_list())
-        let term_tabnr = Bufnr2tabnr(term_list()[0])
-        let num_win_in_tabnr = tabpagewinnr(term_tabnr[0], '$')
-        echo num_win_in_tabnr
-        if num_win_in_tabnr == 1
-          echo "ExitTerm"
-          call term_sendkeys(term_list()[0], "exit\<CR>")
-        endif
-    endif
-endfunction
-
-augroup term-exit
-  autocmd!
-  autocmd BufLeave * call ExitTerm()
-augroup END
