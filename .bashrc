@@ -12,6 +12,9 @@ if [ -f /etc/bashrc ]; then
 fi
 export PYENV_ROOT="/usr/local/bin/pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$GOPATH/bin
 eval "$(pyenv init -)"
 
 # cat
